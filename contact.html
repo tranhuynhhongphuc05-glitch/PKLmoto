@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Liên hệ - PKL Motor</title>
+
+<style>
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #0b0b0f;
+    color: white;
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 10%;
+    background: #11131a;
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.3);
+}
+
+header h2 {
+    color: #ff1a1a;
+    font-size: 28px;
+    text-shadow: 0 0 10px red;
+}
+
+nav a {
+    margin-left: 20px;
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    transition: 0.3s;
+}
+
+nav a:hover {
+    color: #ff3b3b;
+}
+
+/* Contact Form Box (center + neon) */
+.contact-box {
+    width: 55%;
+    margin: 60px auto;
+    background: rgba(20, 20, 25, 0.75);
+    padding: 40px;
+    border-radius: 15px;
+    border: 2px solid #ff1a1a;
+    box-shadow:
+        0 0 12px rgba(255, 0, 0, 0.7),
+        0 0 25px rgba(255, 0, 0, 0.4);
+    animation: fadeUp 1s ease forwards;
+}
+
+.page-title {
+    text-align: center;
+    font-size: 32px;
+    color: #ff1a1a;
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px red;
+}
+
+.contact-form {
+    width: 100%;
+}
+
+.contact-form label {
+    font-size: 18px;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0 25px 0;
+    border-radius: 10px;
+    border: 1px solid #ff1a1a;
+    background: #15161c;
+    color: white;
+    font-size: 16px;
+}
+
+.btn {
+    width: 100%;
+    background: #ff1a1a;
+    padding: 14px;
+    border-radius: 10px;
+    border: none;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    box-shadow: 0 0 12px rgba(255, 0, 0, 0.6);
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background: #ff3b3b;
+}
+
+/* Fade-up animation */
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Popup notification chuẩn */
+.notify-box {
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    background: #ff1a1a;
+    padding: 14px 22px;
+    border-radius: 10px;
+    font-size: 18px;
+    box-shadow: 0 0 12px rgba(255, 0, 0, 0.7);
+    transform: translateX(120%);
+    opacity: 0;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+    z-index: 9999;
+}
+
+.notify-box.show {
+    transform: translateX(0);
+    opacity: 1;
+}
+</style>
+
+</head>
+<body>
+
+<header>
+    <h2>PKL Motor</h2>
+    <nav>
+        <a href="index.html">Trang Chủ</a>
+        <a href="bikes.html">Danh Sách Xe</a>
+        <a href="compare.html">So Sánh Xe</a>
+        <a href="contact.html">Liên Hệ</a>
+    </nav>
+</header>
+
+<div class="container contact-box">
+    <h2 class="page-title">Liên hệ tư vấn</h2>
+
+    <form id="contactForm" class="contact-form">
+        <label>Họ tên</label>
+        <input type="text" placeholder="Nhập họ tên">
+
+        <label>Email</label>
+        <input type="email" placeholder="Nhập email">
+
+        <label>Nội dung</label>
+        <textarea rows="5" placeholder="Nhập nội dung"></textarea>
+
+        <button type="submit" class="btn">Gửi</button>
+    </form>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const form = document.getElementById("contactForm");
+
+    // Tạo popup notification
+    const notifyBox = document.createElement("div");
+    notifyBox.className = "notify-box";
+    notifyBox.innerText = "Đã gửi thành công, chúng tôi sẽ liên hệ sớm!";
+    document.body.appendChild(notifyBox);
+
+    form.addEventListener("submit", function(e) {
+        e.preventDefault(); // Ngăn reload trang
+
+        // Hiện popup
+        notifyBox.classList.add("show");
+
+        // 3 giây sau ẩn popup
+        setTimeout(() => {
+            notifyBox.classList.remove("show");
+        }, 3000);
+
+        // Reset form sau khi gửi
+        form.reset();
+
+        // Nếu muốn gửi dữ liệu thật lên server, bỏ comment dòng sau
+        // form.submit();
+    });
+});
+</script>
+
+</body>
+</html>

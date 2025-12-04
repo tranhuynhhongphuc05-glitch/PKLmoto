@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Chi tiết xe • PKL Motor</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<!-- Gọi theme chung -->
+<link rel="stylesheet" href="style.css">
+
+<style>
+  /* Chỉnh tỉ lệ ảnh xe đẹp, căn giữa khung */
+  .photo-wrap {
+    height: 400px; /* Chiều cao khung ảnh */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .photo-wrap img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain; /* Giữ tỉ lệ ảnh */
+    border-radius: 14px; /* Bo góc nhẹ nếu muốn */
+  }
+</style>
+
+</head>
+<body>
+
+<header>
+  <h2>PKL Motor</h2>
+  <nav>
+    <a href="index.html">Trang chủ</a>
+    <a href="bikes.html">Danh sách xe</a>
+    <a href="contact.html">Liên hệ</a>
+  </nav>
+</header>
+
+<div class="container" style="margin-top:40px;">
+
+  <div class="showroom" style="
+        display:grid;
+        grid-template-columns: 55% 45%;
+        gap:40px;
+    ">
+    
+    <!-- ẢNH XE -->
+    <div class="photo-wrap" style="
+        background: var(--card);
+        padding:22px;
+        border-radius:18px;
+        box-shadow:0 12px 25px rgba(0,0,0,0.55);
+        border:1px solid rgba(255,0,40,0.25);
+        text-align:center;
+    ">
+      <img id="bike-img" class="big-img" src="" alt="">
+    </div>
+
+    <!-- THÔNG SỐ -->
+    <aside class="spec compare-box">
+      <h1 id="bike-name" style="color:var(--accent);text-shadow:0 0 12px var(--accent-glow);"></h1>
+      <div class="meta" id="brand-meta" style="margin-bottom:12px;color:var(--muted);"></div>
+
+      <div class="plate" style="
+          padding:16px;
+          border-radius:14px;
+          background:rgba(255,255,255,0.03);
+          border:1px solid rgba(255,0,40,0.15);
+          box-shadow: inset 0 0 12px rgba(255,0,40,0.15);
+          margin-bottom:18px;
+      ">
+        <div class="spec-row">
+          <div class="spec-key">Động cơ</div><div class="spec-val" id="engine"></div>
+        </div>
+        <div class="spec-row">
+          <div class="spec-key">Công suất</div><div class="spec-val" id="power"></div>
+        </div>
+        <div class="spec-row">
+          <div class="spec-key">Trọng lượng</div><div class="spec-val" id="weight"></div>
+        </div>
+        <div class="spec-row">
+          <div class="spec-key">Giá</div><div class="spec-val" id="price"></div>
+        </div>
+      </div>
+
+      <div class="actions" style="display:flex;gap:14px;flex-wrap:wrap;margin-top:16px;">
+        <button class="btn" id="buyBtn">MUA NGAY</button>
+        <button class="btn-ghost" id="websiteBtn" style="
+            background:transparent;
+            border:1px solid var(--accent);
+            padding:10px 18px;
+            color:var(--accent);
+            font-weight:800;
+            border-radius:10px;
+        ">Trang hãng xe</button>
+      </div>
+
+      <a href="bikes.html" class="btn-ghost" style="
+          margin-top:18px;
+          display:inline-block;
+          text-decoration:none;
+          border:1px solid rgba(255,0,40,0.25);
+          padding:10px 16px;
+          border-radius:10px;
+          color:var(--accent2);
+          text-shadow:0 0 8px rgba(76,201,255,0.4);
+      ">← Quay lại danh sách xe</a>
+
+    </aside>
+
+  </div>
+</div>
+
+<script>
+/* Database */
+const bikes = {
+    r1: {
+        name: "Yamaha R1",
+        brand: "Yamaha",
+        engine: "998cc",
+        power: "200 HP",
+        weight: "200 kg",
+        price: "600.000.000 VNĐ",
+        img: "img/Yamaha R1.jpg",
+        link: "https://www.yamaha-motor.com"
+    },
+    cbr: {
+        name: "Honda CBR1000RR",
+        brand: "Honda",
+        engine: "1000cc",
+        power: "215 HP",
+        weight: "202 kg",
+        price: "700.000.000 VNĐ",
+        img: "img/Honda CBR1000RR.jpg",
+        link: "https://www.honda.com"
+    },
+    zx10r: {
+        name: "Kawasaki ZX-10R",
+        brand: "Kawasaki",
+        engine: "998cc",
+        power: "203 HP",
+        weight: "207 kg",
+        price: "580.000.000 VNĐ",
+        img: "img/Kawasaki ZX-10R.jpg",
+        link: "https://www.kawasaki.com"
+    },
+    DucatiV42025: {
+        name: "Ducati Panigale V4 R 2025",
+        brand: "Ducati",
+        engine: "999cc",
+        power: "212 HP",
+        weight: "193 kg",
+        price: "1.300.000.000 VNĐ",
+        img: "img/Ducati Panigale V4 R 2025.jpg",
+        link: "https://www.ducati.com"
+    },
+    "Kawasaki Ninja H2 2025": {
+        name: "Kawasaki Ninja H2 2025",
+        brand: "Kawasaki",
+        engine: "998cc",
+        power: "310 HP",
+        weight: "238 kg",
+        price: "1.800.000.000 VNĐ",
+        img: "img/Kawasaki Ninja H2 2025.jpg",
+        link: "https://www.kawasaki.com"
+    },
+    "Yamaha R1M 2025": {
+        name: "Yamaha R1M 2025",
+        brand: "Yamaha",
+        engine: "998cc",
+        power: "200 HP",
+        weight: "199 kg",
+        price: "950.000.000 VNĐ",
+        img: "img/Yamaha R1M 2025.jpg",
+        link: "https://www.yamaha-motor.com"
+    },
+    "Benelli 302S": {
+        name: "Benelli 302S",
+        brand: "Benelli",
+        engine: "300cc",
+        power: "100 HP",
+        weight: "170 kg",
+        price: "127.966.000 VNĐ",
+        img: "img/Benelli 302S.jpg",
+        link: "https://www.benelli.com"
+    },
+    "Kawasaki Z1000": {
+        name: "Kawasaki Z1000",
+        brand: "Kawasaki",
+        engine: "1.043cc",
+        power: "142 HP",
+        weight: "221 kg",
+        price: "412.000.000 VNĐ",
+        img: "img/Kawasaki Z1000.jpg",
+        link: "https://www.kawasaki.com"
+    },
+    "BMW S1000RR": {
+        name: "BMW S1000RR",
+        brand: "BMW",
+        engine: "999cc",
+        power: "193 HP",
+        weight: "197 kg",
+        price: "457.080.000 VNĐ",
+        img: "img/BMW S1000RR.jpg",
+        link: "https://www.bmw-motorcycles.com"
+    },
+    "Harley Davidson Street 750": {
+        name: "Harley Davidson Street 750",
+        brand: "Harley Davidson",
+        engine: "749cc",
+        power: "100 HP",
+        weight: "228 kg",
+        price: "354.000.000 VNĐ",
+        img: "img/Harley Davidson Street 750.jpg",
+        link: "https://www.harley-davidson.com"
+    },
+    "Harley-Davidson CVO": {
+        name: "Harley-Davidson CVO Road Glide 2025",
+        brand: "Harley Davidson",
+        engine: "999cc",
+        power: "115 HP",
+        weight: "360 kg",
+        price: "1.210.000.000 VNĐ",
+        img: "img/Harley-Davidson CVO Road Glide 2025 .jpg",
+        link: "https://www.harley-davidson.com"
+    },
+    "Harley-Davidson Road": {
+        name: "Harley-Davidson Road Glide 2025",
+        brand: "Harley Davidson",
+        engine: "999cc",
+        power: "117 HP",
+        weight: "365 kg",
+        price: "738.000.000 VNĐ",
+        img: "img/Harley-Davidson Road Glide 2025.jpg",
+        link: "https://www.harley-davidson.com"
+    }
+};
+
+const id = new URLSearchParams(window.location.search).get("id");
+const b = bikes[id];
+
+if(!b){
+  document.body.innerHTML = "<h1 style='text-align:center;margin-top:40px'>Xe không tồn tại!</h1>";
+} else {
+  document.getElementById("bike-img").src = b.img;
+  document.getElementById("bike-img").alt = b.name;
+  document.getElementById("bike-name").textContent = b.name;
+  document.getElementById("brand-meta").textContent = "Hãng: " + b.brand;
+  document.getElementById("engine").textContent = b.engine;
+  document.getElementById("power").textContent = b.power;
+  document.getElementById("weight").textContent = b.weight;
+  document.getElementById("price").textContent = b.price;
+
+  document.getElementById("websiteBtn").onclick = ()=>window.open(b.link,"_blank");
+  document.getElementById("buyBtn").onclick = ()=>alert("Đã gửi yêu cầu mua xe! Chúng tôi sẽ liên hệ sớm ❤️");
+}
+</script>
+
+</body>
+</html>

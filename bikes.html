@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Danh sách xe PKL</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+<header>
+    <h2>PKL Motor</h2>
+    <nav>
+        <a href="index.html">Trang Chủ</a>
+        <a href="bikes.html">Danh Sách Xe</a>
+        <a href="compare.html">So Sánh Xe</a>
+        <a href="contact.html">Liên Hệ</a>
+    </nav>
+</header>
+
+<div class="container">
+<h2 style="
+    text-align: center;
+    font-size: 42px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    background: linear-gradient(90deg, #00ffff, #66ffff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow:
+        0 0 1px #00ffff55,
+        0 0 2px #66ffff33;
+    animation: neonBlueSoft 3s ease-in-out infinite alternate;
+">
+    Các dòng xe nổi bật
+</h2>
+
+<style>
+@keyframes neonBlueSoft {
+    0% {
+        text-shadow: 0 0 1px #00ffff55, 0 0 2px #66ffff33;
+    }
+    100% {
+        text-shadow: 0 0 2px #00ffff66, 0 0 3px #66ffff44;
+    }
+}
+</style>
+
+<div class="filter-controls">
+    <div class="filter-group">
+        <label for="brand-filter">Hãng Xe:</label>
+        <select id="brand-filter" class="filter-select">
+            <option value="">Tất cả Hãng</option>
+            <option value="Yamaha">Yamaha</option>
+            <option value="Honda">Honda</option>
+            <option value="Kawasaki">Kawasaki</option>
+            <option value="Ducati">Ducati</option>
+            <option value="Benelli">Benelli</option>
+            <option value="BMW">BMW</option>
+            <option value="Harley Davidson">Harley Davidson</option>
+        </select>
+    </div>
+    <div class="filter-group">
+        <label for="price-filter">Giá Tiền (VNĐ):</label>
+        <select id="price-filter" class="filter-select">
+            <option value="">Tất cả Giá</option>
+            <option value="0-400M">Dưới 400 Triệu</option>
+            <option value="400M-700M">400 Triệu - 700 Triệu</option>
+            <option value="700M-1T">700 Triệu - 1 Tỷ</option>
+            <option value="1T+">Trên 1 Tỷ</option>
+        </select>
+    </div>
+    <a class="button btn filter-apply" id="apply-filter">Áp dụng Lọc</a>
+</div>
+<div class="bike-list" id="bike-list">
+
+        <div class="bike" data-brand="Yamaha" data-price-vnd="600000000">
+            <img src="img/Yamaha R1.jpg" alt="Yamaha R1">
+            <h3>Yamaha R1</h3>
+            <p>Hãng: Yamaha</p>
+            <p>Giá: 600.000.000 VNĐ</p>
+            <a class="button btn" href="detail.html?id=r1">Xem chi tiết</a>
+            <a class="button btn add-compare" data-bike="r1">Thêm vào so sánh</a>
+        </div>
+
+        <div class="bike" data-brand="Honda" data-price-vnd="700000000">
+            <img src="img/Honda CBR1000RR.jpg" alt="Honda CBR1000RR">
+            <h3>Honda CBR1000RR</h3>
+            <p>Hãng: Honda</p>
+            <p>Giá: 700.000.000 VNĐ</p>
+            <a class="button btn" href="detail.html?id=cbr">Xem chi tiết</a>
+            <a class="button btn add-compare" data-bike="cbr">Thêm vào so sánh</a>
+        </div>
+
+        <div class="bike" data-brand="Kawasaki" data-price-vnd="580000000">
+            <img src="img/Kawasaki ZX-10R.jpg" alt="Kawasaki ZX-10R">
+            <h3>Kawasaki ZX-10R</h3>
+            <p>Hãng: Kawasaki</p>
+            <p>Giá: 580.000.000 VNĐ</p>
+            <a class="button btn" href="detail.html?id=zx10r">Xem chi tiết</a>
+            <a class="button btn add-compare" data-bike="zx10r">Thêm vào so sánh</a>
+        </div>
+
+        <div class="bike" data-brand="Ducati" data-price-vnd="1300000000">
+            <img src="img/Ducati Panigale V4 R 2025.jpg" alt="Ducati Panigale V4 R 2025">
+            <h3>Ducati Panigale V4 R 2025</h3>
+            <p>Hãng: Ducati</p>
+            <p>Giá: 1.3 tỷ VNĐ</p>
+            <a class="button btn" href="detail.html?id=DucatiV42025">Xem chi tiết</a>
+            <a class="button btn add-compare" data-bike="DucatiV42025">Thêm vào so sánh</a>
+        </div>
+
+        <div class="bike" data-brand="Kawasaki" data-price-vnd="1800000000">
+            <img src="img/Kawasaki Ninja H2 2025.jpg" alt="Kawasaki Ninja H2 2025">
+            <h3>Kawasaki Ninja H2 2025</h3>
+            <p>Hãng: Kawasaki</p>
+            <p>Giá: 1.8 tỷ VNĐ</p>
+            <a class="button btn" href="detail.html?id=Kawasaki Ninja H2 2025">Xem chi tiết</a>
+            <a class="button btn add-compare" data-bike="Kawasaki Ninja H2 2025">Thêm vào so sánh</a>
+        </div>
+
+        <div class="bike" data-brand="Yamaha" data-price-vnd="950000000">
+            <img src="img/Yamaha R1M 2025.jpg" alt="Yamaha R1M 2025">
+            <h3>Yamaha R1M 2025</h3>
+            <p>Hãng: Yamaha</p>
+            <p>Giá: 950.000.000 VNĐ</p>
+            <a class="button btn" href="detail.html?id=Yamaha R1M 2025">Xem chi tiết</a>
+            <a class="button btn add-compare" data-bike="Yamaha R1M 2025">Thêm vào so sánh</a>
+        </div>
+
+        <div class="bike" data-brand="Benelli" data-price-vnd="128000000">
+            <img src="img/Benelli 302S.jpg" alt="Benelli 302S">
+            <h3>Benelli 302S</h3>
+            <p>Hãng: Benelli</p>
+            <p>Giá: 128.000.000 VNĐ</p>
+            <a class="button btn" href="detail.html?id=Benelli 302S">Xem chi tiết</a>
+            <a class="button btn add-compare" data-bike="Benelli 302S">Thêm vào so sánh</a>
+        </div>
+
+        <div class="bike" data-brand="Kawasaki" data-price-vnd="412000000">
+            <img src="img/Kawasaki Z1000.jpg" alt="Kawasaki Z1000">
+            <h3>Kawasaki Z1000</h3>
+            <p>Hãng: Kawasaki</p>
+            <p>Giá: 412.000.000 VNĐ</p>
+            <a class="button btn" href="detail.html?id=Kawasaki Z1000">Xem chi tiết</a>
+            <a class="button btn add-compare" data-bike="Kawasaki Z1000">Thêm vào so sánh</a>
+        </div>
+
+        <div class="bike" data-brand="BMW" data-price-vnd="457080000">
+            <img src="img/BMW S1000RR.jpg" alt="BMW S1000RR">
+            <h3>BMW S1000RR</h3>
+            <p>Hãng: BMW</p>
+            <p>Giá: 457.080.000 VNĐ</p>
+            <a class="button btn" href="detail.html?id=BMW S1000RR">Xem chi tiết</a>
+            <a class="button btn add-compare" data-bike="BMW S1000RR">Thêm vào so sánh</a>
+        </div>
+
+        <div class="bike" data-brand="Harley Davidson" data-price-vnd="375766000">
+            <img src="img/Harley Davidson Street 750.jpg" alt="Harley Davidson Street 750">
+            <h3>Harley Davidson Street 750</h3>
+            <p>Hãng: Harley Davidson</p>
+            <p>Giá: 375.766.000 VNĐ</p>
+            <a class="button btn" href="detail.html?id=Harley Davidson Street 750">Xem chi tiết</a>
+            <a class="button btn add-compare" data-bike="Harley Davidson Street 750">Thêm vào so sánh</a>
+        </div>
+
+        <div class="bike" data-brand="Harley Davidson" data-price-vnd="1210000000">
+            <img src="img/Harley-Davidson CVO Road Glide 2025 .jpg" alt="Harley-Davidson CVO Road Glide 2025">
+            <h3>Harley-Davidson CVO Road Glide 2025</h3>
+            <p>Hãng: Harley Davidson</p>
+            <p>Giá: 1.21 tỷ VNĐ</p>
+            <a class="button btn" href="detail.html?id=Harley-Davidson CVO">Xem chi tiết</a>
+            <a class="button btn add-compare" data-bike="Harley-Davidson CVO">Thêm vào so sánh</a>
+        </div>
+
+        <div class="bike" data-brand="Harley Davidson" data-price-vnd="738500000">
+            <img src="img/Harley-Davidson Road Glide 2025.jpg" alt="Harley-Davidson Road Glide 2025">
+            <h3>Harley-Davidson Road Glide 2025</h3>
+            <p>Hãng: Harley Davidson</p>
+            <p>Giá: 738.500.000 VNĐ</p>
+            <a class="button btn" href="detail.html?id=Harley-Davidson Road">Xem chi tiết</a>
+            <a class="button btn add-compare" data-bike="Harley-Davidson Road">Thêm vào so sánh</a>
+        </div>
+
+    </div>
+</div>
+
+<script>
+// Logic lọc xe
+const allBikes = document.querySelectorAll(".bike");
+const brandFilter = document.getElementById("brand-filter");
+const priceFilter = document.getElementById("price-filter");
+const applyFilterButton = document.getElementById("apply-filter");
+
+// Hàm chuyển đổi giá trị giá tiền từ data-attribute thành số (đồng)
+function getPriceValue(priceData) {
+    if (priceData) {
+        return parseInt(priceData);
+    }
+    return 0;
+}
+
+// Hàm kiểm tra xe có thuộc phạm vi giá đã chọn không
+function matchesPriceRange(price, range) {
+    if (!range || range === "") {
+        return true;
+    }
+    const priceVN = getPriceValue(price);
+    switch (range) {
+        case "0-400M":
+            return priceVN < 400000000;
+        case "400M-700M":
+            return priceVN >= 400000000 && priceVN <= 700000000;
+        case "700M-1T":
+            return priceVN > 700000000 && priceVN <= 1000000000;
+        case "1T+":
+            return priceVN > 1000000000;
+        default:
+            return true;
+    }
+}
+
+// Hàm áp dụng bộ lọc
+function applyFilters() {
+    const selectedBrand = brandFilter.value;
+    const selectedPriceRange = priceFilter.value;
+
+    allBikes.forEach(bike => {
+        const bikeBrand = bike.getAttribute("data-brand");
+        const bikePrice = bike.getAttribute("data-price-vnd");
+
+        const brandMatch = !selectedBrand || bikeBrand === selectedBrand;
+        const priceMatch = matchesPriceRange(bikePrice, selectedPriceRange);
+
+        if (brandMatch && priceMatch) {
+            bike.style.display = "block"; // Hiển thị xe
+        } else {
+            bike.style.display = "none"; // Ẩn xe
+        }
+    });
+}
+
+// Gắn sự kiện cho nút "Áp dụng Lọc"
+applyFilterButton.addEventListener("click", applyFilters);
+
+
+// ==================== LOGIC SO SÁNH (GIỮ NGUYÊN) ====================
+const buttons = document.querySelectorAll(".add-compare");
+buttons.forEach(btn => {
+    btn.addEventListener("click", () => {
+        let compareList = JSON.parse(localStorage.getItem("compareBikes")) || [];
+        const bikeId = btn.getAttribute("data-bike");
+        if(!compareList.includes(bikeId)){
+            if(compareList.length >= 2){
+                alert("Chỉ có thể so sánh 2 xe cùng lúc!");
+                return;
+            }
+            compareList.push(bikeId);
+            localStorage.setItem("compareBikes", JSON.stringify(compareList));
+            alert("Xe đã được thêm vào so sánh!");
+        } else {
+            alert("Xe này đã có trong danh sách so sánh!");
+        }
+    });
+});
+</script>
+
+</body>
+</html>

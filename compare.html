@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>So sánh xe PKL</title>
+<style>
+body {
+    background: #000814;
+    font-family: Arial, sans-serif;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+    background: #001220;
+    box-shadow: 0 0 15px #00ffff55;
+}
+header h2 {
+    color: #00ffff;
+    text-shadow: 0 0 10px #00ffff;
+}
+header nav a {
+    color: #fff;
+    margin-left: 20px;
+    text-decoration: none;
+}
+header nav a:hover { color: #00ffff; }
+
+.notify-box {
+    width: 100%;
+    padding: 15px;
+    background: #ff1e28;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    margin-top: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px #ff1e28;
+    display: none;
+}
+
+.page-title {
+    text-align: center;
+    margin-top: 25px;
+    font-size: 28px;
+    color: #00ffff;
+    text-shadow: 0 0 15px #00ffff;
+}
+
+.compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 25px;
+    background: #001020;
+    color: #00ffff;
+    text-align: center;
+    display: none;
+}
+.compare-table th, .compare-table td {
+    border: 1px solid #00ffff44;
+    padding: 14px;
+}
+.compare-table th {
+    background: #000;
+    font-size: 18px;
+}
+.compare-table td img {
+    width: 170px;
+    border-radius: 12px;
+    box-shadow: 0 0 20px #00ffffaa;
+}
+
+.button-clear {
+    display: block;
+    margin: 30px auto;
+    padding: 12px 22px;
+    background: #ff1e28;
+    border: none;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 17px;
+    box-shadow: 0 0 15px #ff1e28;
+}
+.button-clear:hover { transform: scale(1.06); }
+</style>
+</head>
+
+<body>
+
+<header>
+    <h2>PKL Motor</h2>
+    <nav>
+        <a href="index.html">Trang Chủ</a>
+        <a href="bikes.html">Danh Sách Xe</a>
+        <a href="compare.html">So Sánh Xe</a>
+        <a href="contact.html">Liên Hệ</a>
+    </nav>
+</header>
+
+<div class="notify-box" id="notify"></div>
+
+<h3 class="page-title">So sánh xe PKL</h3>
+
+<table class="compare-table" id="result">
+    <thead>
+        <tr>
+            <th>Thông số</th>
+            <th id="name1"></th>
+            <th id="name2"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr><td>Hình ảnh</td><td><img id="img1"></td><td><img id="img2"></td></tr>
+        <tr><td>Hãng</td><td id="brand1"></td><td id="brand2"></td></tr>
+        <tr><td>Giá</td><td id="price1"></td><td id="price2"></td></tr>
+        <tr><td>Phân khối</td><td id="cc1"></td><td id="cc2"></td></tr>
+        <tr><td>Công suất</td><td id="hp1"></td><td id="hp2"></td></tr>
+    </tbody>
+</table>
+
+<button class="button-clear" id="clearCompare">XÓA SO SÁNH</button>
+
+<script>
+/* DANH SÁCH XE - GIỮ NGUYÊN Y NHƯ EM */
+const bikes = {
+    r1:{name:"Yamaha R1",brand:"Yamaha",price:"600.000.000 VNĐ",cc:"998cc",hp:"200 HP",img:"img/Yamaha R1.jpg"},
+    cbr:{name:"Honda CBR1000RR",brand:"Honda",price:"700.000.000 VNĐ",cc:"1000cc",hp:"215 HP",img:"img/Honda CBR1000RR.jpg"},
+    zx10r:{name:"Kawasaki ZX-10R",brand:"Kawasaki",price:"580.000.000 VNĐ",cc:"998cc",hp:"203 HP",img:"img/Kawasaki ZX-10R.jpg"},
+    DucatiV42025:{name:"Ducati Panigale V4 R 2025",brand:"Ducati",price:"1.300.000.000 VNĐ",cc:"999cc",hp:"212 HP",img:"img/Ducati Panigale V4 R 2025.jpg"},
+    "Kawasaki Ninja H2 2025":{name:"Kawasaki Ninja H2 2025",brand:"Kawasaki",price:"1.800.000.000 VNĐ",cc:"998cc",hp:"310 HP",img:"img/Kawasaki Ninja H2 2025.jpg"},
+    "Yamaha R1M 2025":{name:"Yamaha R1M 2025",brand:"Yamaha",price:"950.000.000 VNĐ",cc:"998cc",hp:"200 HP",img:"img/Yamaha R1M 2025.jpg"},
+    "Benelli 302S":{name:"Benelli 302S",brand:"Benelli",price:"127.966.000 VNĐ",cc:"300cc",hp:"100 HP",img:"img/Benelli 302S.jpg"},
+    "Kawasaki Z1000":{name:"Kawasaki Z1000",brand:"Kawasaki",price:"412.000.000 VNĐ",cc:"1.043cc",hp:"142 HP",img:"img/Kawasaki Z1000.jpg"},
+    "BMW S1000RR":{name:"BMW S1000RR",brand:"BMW",price:"457.080.000 VNĐ",cc:"999cc",hp:"193 HP",img:"img/BMW S1000RR.jpg"},
+    "Harley Davidson Street 750":{name:"Harley Davidson Street 750",brand:"Harley Davidson",price:"354.000.000 VNĐ",cc:"749cc",hp:"100 HP",img:"img/Harley Davidson Street 750.jpg"},
+    "Harley-Davidson CVO":{name:"Harley-Davidson CVO Road Glide 2025",brand:"Harley Davidson",price:"1.210.000.000 VNĐ",cc:"999cc",hp:"115 HP",img:"img/Harley-Davidson CVO Road Glide 2025 .jpg"},
+    "Harley-Davidson Road":{name:"Harley-Davidson Road Glide 2025",brand:"Harley Davidson",price:"738.000.000 VNĐ",cc:"999cc",hp:"117 HP",img:"img/Harley-Davidson Road Glide 2025.jpg"}
+};
+
+let compareList = JSON.parse(localStorage.getItem("compareBikes")) || [];
+
+/* HIỂN THỊ 4 TRẠNG THÁI */
+function showCompare() {
+    const notify = document.getElementById("notify");
+    const table = document.getElementById("result");
+
+    // Trạng thái 0 xe
+    if (compareList.length === 0) {
+        notify.innerText = "⚠ Chưa có xe nào trong danh sách so sánh! Vui lòng chọn xe trước.";
+        notify.style.display = "block";
+        table.style.display = "none";
+        return;
+    }
+
+    // Trạng thái 1 xe
+    if (compareList.length === 1) {
+        notify.innerText = "⚠ Vui lòng chọn thêm 1 xe nữa để so sánh!";
+        notify.style.display = "block";
+        table.style.display = "none";
+        return;
+    }
+
+    // Trạng thái đủ 2 xe
+    notify.style.display = "none";
+
+    const x = bikes[compareList[0]];
+    const y = bikes[compareList[1]];
+
+    document.getElementById("name1").innerText = x.name;
+    document.getElementById("name2").innerText = y.name;
+    document.getElementById("brand1").innerText = x.brand;
+    document.getElementById("brand2").innerText = y.brand;
+    document.getElementById("price1").innerText = x.price;
+    document.getElementById("price2").innerText = y.price;
+    document.getElementById("cc1").innerText = x.cc;
+    document.getElementById("cc2").innerText = y.cc;
+    document.getElementById("hp1").innerText = x.hp;
+    document.getElementById("hp2").innerText = y.hp;
+    document.getElementById("img1").src = x.img;
+    document.getElementById("img2").src = y.img;
+
+    table.style.display = "table";
+}
+
+/* NÚT XÓA */
+document.getElementById("clearCompare").addEventListener("click", () => {
+    localStorage.removeItem("compareBikes");
+    compareList = [];
+    showCompare();
+});
+
+/* LOAD LẦN ĐẦU */
+showCompare();
+</script>
+
+</body>
+</html>
